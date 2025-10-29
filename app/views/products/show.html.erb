@@ -1,14 +1,22 @@
-<% cache @product do %>
-    <%= image_tag @product.featured_image, style: "width: 200px; height: 200px; object-fit: cover;" if @product.featured_image.attached?%>
-    <h1><%= @product.name %></h1>
-    <p><b>Description:</b> <%= @product.description if @product.description.present? %></p>
-<% end %>
+<p><%= link_to "Back", products_path %></p>
 
-<%= link_to "Back", products_path %>
+<section class="product">
+    <% cache @product do %>
+        <%= image_tag @product.featured_image, style: "width: 200px; height: 200px; object-fit: cover;" if @product.featured_image.attached?%>
+        <section class="product-info">
+            <h1><%= @product.name %></h1>
+            <div>
+                <b>Description:</b> 
+                <%= @product.description if @product.description.present? %>
+                <%= render "inventory", product: @product %>
+            </div>
+        </section>
+        <% end %>
 
-<% if authenticated? %>
-    <%= link_to "Edit", edit_product_path(@product) %>
-    <%= button_to "Delete", @product, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-<% end %>
+    <% if authenticated? %>
+        <%= link_to "Edit", edit_product_path(@product) %>
+        <%= button_to "Delete", @product, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+    <% end %>
 
-<%= render "inventory", product: @product %>
+    
+</section>

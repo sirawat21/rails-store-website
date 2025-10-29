@@ -1,4 +1,8 @@
-<h1><%= @product.name %></h1>
+<% cache @product do %>
+    <%= image_tag @product.featured_image, style: "width: 200px; height: 200px; object-fit: cover;" if @product.featured_image.attached?%>
+    <h1><%= @product.name %></h1>
+    <p><b>Description:</b> <%= @product.description if @product.description.present? %></p>
+<% end %>
 
 <%= link_to "Back", products_path %>
 

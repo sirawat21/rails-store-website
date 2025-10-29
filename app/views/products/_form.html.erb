@@ -6,10 +6,12 @@
   <div>
     <%= form.label :name %>
     <%= form.text_field :name %>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.rich_textarea :description %>
+    <%= form.file_field :featured_image, accept: "image/*" %>
   </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
-Copy
